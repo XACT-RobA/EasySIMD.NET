@@ -4,7 +4,7 @@ using EasySIMD.NET;
 
 namespace EasySIMD.NET.Test
 {
-    public class BasicMathsExtensionsTests
+    public class BasicMathsExtensionsFloatingPointTests
     {
         private static readonly int precision = 8;
 

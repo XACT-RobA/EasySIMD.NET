@@ -5,6 +5,9 @@ namespace EasySIMD.NET
     public static class ScalarOperators
     {
         // Add
+        public static short Add(short left, short right) => (short)(left + right);
+        public static int Add(int left, int right) => left + right;
+        public static long Add(long left, long right) => left + right;
         public static float Add(float left, float right) => left + right;
         public static double Add(double left, double right) => left + right;
 

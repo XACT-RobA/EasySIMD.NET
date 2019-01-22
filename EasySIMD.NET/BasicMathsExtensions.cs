@@ -6,6 +6,12 @@ namespace EasySIMD.NET
     public static class BasicMathsExtensions
     {
         // Add
+        public static short[] Add(this short[] left, short[] right)
+            => left.Map(right, VectorOperators.Add, ScalarOperators.Add);
+        public static int[] Add(this int[] left, int[] right)
+            => left.Map(right, VectorOperators.Add, ScalarOperators.Add);
+        public static long[] Add(this long[] left, long[] right)
+            => left.Map(right, VectorOperators.Add, ScalarOperators.Add);
         public static float[] Add(this float[] left, float[] right)
             => left.Map(right, VectorOperators.Add, ScalarOperators.Add);
         public static double[] Add(this double[] left, double[] right)
