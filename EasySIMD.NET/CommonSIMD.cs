@@ -36,10 +36,36 @@ namespace EasySIMD.NET
             return output;
         }
 
-        public static T Reduce<T>(this T[] left, T[] right)
+        public static T Reduce<T>(this T[] input,
+            Func<Vector<T>, Vector<T>, Vector<T>> vectorOperator,
+            Func<T, T, T> scalarOperator,
+            T defaultValue = default(T))
             where T : struct
         {
-            throw new NotImplementedException();
+            var simdLength = SimdLength<T>();
+            var simdRange = input.Length - simdLength;
+            var running = new Vector<T>(defaultValue);
+
+            int i;
+            for (i = 0; i <= simdRange; i += simdLength)
+            {
+                var vinput = new Vector<T>(input, i);
+                running = vectorOperator(running, vinput);
+            }
+
+            var output = defaultValue;
+
+            for (int j = 0; j < simdLength; j++)
+            {
+                output = scalarOperator(output, running[j]);
+            }
+
+            for (; i < input.Length; i++)
+            {
+                output = scalarOperator(output, input[i]);
+            }
+
+            return output;
         }
     }
 }
